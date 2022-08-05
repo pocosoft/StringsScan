@@ -1,6 +1,6 @@
 # StringsScan
 
-
+Unused localized strings find from all strings files.
 
 ## Getting started
 
