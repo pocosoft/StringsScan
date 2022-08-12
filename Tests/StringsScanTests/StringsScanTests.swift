@@ -15,7 +15,7 @@ final class StringsScanTests: XCTestCase {
         // Mac Catalyst won't have `Process`, but it is supported for executables.
         #if !targetEnvironment(macCatalyst)
 
-        let fooBinary = productsDirectory.appendingPathComponent("Localizer")
+        let fooBinary = productsDirectory.appendingPathComponent("StringsScan")
 
         let process = Process()
         process.executableURL = fooBinary
@@ -29,7 +29,7 @@ final class StringsScanTests: XCTestCase {
         let data = pipe.fileHandleForReading.readDataToEndOfFile()
         let output = String(data: data, encoding: .utf8)
 
-        XCTAssertEqual(output, "Hello, world!\n")
+        XCTAssertEqual(output, "")
         #endif
     }
 
