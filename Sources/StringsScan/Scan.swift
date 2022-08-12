@@ -9,18 +9,22 @@ import Foundation
 import StencilSwiftKit
 import PythonKit
 
-let glob = Python.import("glob")
-let re = Python.import("re")
+private let glob = Python.import("glob")
+private let re = Python.import("re")
 
-class Scan {
+final class Scan {
     
-    static func main(_ path: String?) throws {
-        let l = Scan(path)
-        try l.main()
+    private let absoluteSearchPath: String
+    
+    init(_ path: String?) {
+        absoluteSearchPath = path ?? FileManager.default.currentDirectoryPath
     }
-    
-    let absoluteSearchPath: String
-    
+
+    static func main(_ path: String?, verbose: Bool) throws {
+        let l = Self(path)
+        try l.main(verbose: verbose)
+    }
+
     lazy var swiftFiles: Set<String> = {
         globs(ext: "swift").filter { $0.lastPathComponent != "Strings.swift" }
     }()
@@ -46,66 +50,67 @@ class Scan {
         return Set(lines)
     }()
     
-    lazy var stringIds: Set<String> = {
-        var ids: [String] = []
-        localizableFiles.forEach {
-            guard let content = try? String(contentsOfFile: $0, encoding: .utf8) else {
+    lazy var stringIds: Set<SourceLocation> = {
+        var ids: [SourceLocation] = []
+        localizableFiles.forEach { path in
+            guard let content = try? String(contentsOfFile: path, encoding: .utf8) else {
                 return
             }
-            if $0.lastPathComponent == "Localizable.strings" {
-                content.split(separator: "\n").filter { $0.starts(with: "\"") }
-                    .forEach {
-                        var id = $0.components(separatedBy: " = ").first!
+            if path.lastPathComponent == "Localizable.strings" {
+                content.components(separatedBy: "\n").enumerated()
+                    .filter { $1.starts(with: "\"") }
+                    .forEach { line, elem in
+                        var id = elem.components(separatedBy: " = ").first!
                         id.removeFirst()
                         id.removeLast()
-                        ids.append(id)
+                        ids.append(SourceLocation(filepath: path, stringId: id, line: Int64(line + 1)))
                     }
             } else {    // Storyboard's strings file
-                content.split(separator: "\n").filter { $0.starts(with: "\"") }
-                    .forEach {
-                        var id = $0.components(separatedBy: " = ").first!
+                content.components(separatedBy: "\n").enumerated()
+                    .filter { $1.starts(with: "\"") }
+                    .forEach { line, elem in
+                        var id = elem.components(separatedBy: " = ").first!
                         id.removeFirst()
                         id.removeLast()
-                        ids.append(id.components(separatedBy: ".").first!)  // split for `.text` or `.title`
+                        id = id.components(separatedBy: ".").first! // split for `.text` or `.title`
+                        ids.append(SourceLocation(filepath: path, stringId: id, line: Int64(line + 1)))
                     }
             }
         }
         return Set(ids)
     }()
-    
-    init(_ path: String?) {
-        if let path = path {
-            absoluteSearchPath = FileManager.default.currentDirectoryPath.appendingPathComponent(path)
-        } else {
-            absoluteSearchPath = FileManager.default.currentDirectoryPath
+        
+    func main(verbose: Bool) throws {
+        if verbose {
+            print(swiftFiles)
+            print(storyboardFiles)
+            print(localizableFiles)
+            print(stringIds)
+            print(jaLocalizableLines)
         }
-    }
-    
-    func main() throws {
-//        print(swiftFiles)
-//        print(storyboardFiles)
-//        print(localizableFiles)
-//        print(stringIds)
-//        print(jaLocalizableLines)
 
         // Whether the ID is used in the project.
         var usedIds = [String]()
         var unusedIds = [String]()
         stringIds.forEach {
-            if let result = containsIn(stringId: $0) {
-                print("✅ \"\($0)\" is used in \(result)")
-                usedIds.append($0)
+            if let result = containsIn(stringId: $0.stringId) {
+                if verbose {
+                    print("✅ \"\($0.stringId)\" is used in \(result)")
+                }
+                usedIds.append($0.stringId)
             } else {
-                print("⚠️ Warning \"\($0)\" is unused")
-                unusedIds.append($0)
+                print("\($0.filepath):\($0.line):\($0.column): warning: \"\($0.stringId)\" is unused")
+                unusedIds.append($0.stringId)
             }
         }
-        
-        print("❤️  Used strings is \(usedIds.count)")
-        print("💙  Unused strings is \(unusedIds.count)")
+
+        if verbose {
+            print("❤️  Used strings is \(usedIds.count)")
+            print("💙  Unused strings is \(unusedIds.count)")
+        }
     }
 
-    func findLocalizedExtension(_ filepath: String) throws -> [String] {
+    func findLocalized(_ filepath: String) throws -> [String] {
         let str = try String(contentsOfFile: filepath, encoding: .utf8)
         return re.findall("\".+\"\\.localized", str).map { "\($0)" }
     }
