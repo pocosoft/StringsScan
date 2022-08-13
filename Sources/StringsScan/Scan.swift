@@ -7,6 +7,7 @@
 
 import Foundation
 import StencilSwiftKit
+import PathKit
 import PythonKit
 
 private let glob = Python.import("glob")
@@ -25,38 +26,38 @@ final class Scan {
         try l.main(verbose: verbose)
     }
 
-    lazy var swiftFiles: Set<String> = {
-        globs(ext: "swift").filter { $0.lastPathComponent != "Strings.swift" }
+    lazy var swiftPaths: Set<Path> = {
+        globs(ext: "swift").filter { $0.lastComponent != "Strings.swift" }
     }()
     
-    lazy var storyboardFiles: Set<String> = {
+    lazy var storyboardPaths: Set<Path> = {
         globs(ext: "storyboard")
     }()
     
-    lazy var localizableFiles: Set<String> = {
+    lazy var stringsPaths: Set<Path> = {
         globs(ext: "strings")
     }()
     
-    lazy var jaLocalizableLines: Set<String> = {
+    lazy var jaLocalizableLines: [String] = {
         var lines: [String] = []
-        localizableFiles.forEach {
-            guard $0.contains("ja.lproj"),
-                  let content = try? String(contentsOfFile: $0, encoding: .utf8) else {
+        stringsPaths.forEach { path in
+            guard path.contains("ja.lproj"),
+                  let content = try? path.read(.utf8) else {
                 return
             }
             let line = content.components(separatedBy: "\n").filter { $0.starts(with: "\"") }
             lines += line
         }
-        return Set(lines)
+        return lines
     }()
     
     lazy var stringIds: Set<SourceLocation> = {
         var ids: [SourceLocation] = []
-        localizableFiles.forEach { path in
-            guard let content = try? String(contentsOfFile: path, encoding: .utf8) else {
+        stringsPaths.forEach { path in
+            guard let content = try? path.read(.utf8) else {
                 return
             }
-            if path.lastPathComponent == "Localizable.strings" {
+            if path.lastComponent == "Localizable.strings" {
                 content.components(separatedBy: "\n").enumerated()
                     .filter { $1.starts(with: "\"") }
                     .forEach { line, elem in
@@ -82,9 +83,9 @@ final class Scan {
         
     func main(verbose: Bool) throws {
         if verbose {
-            print(swiftFiles)
-            print(storyboardFiles)
-            print(localizableFiles)
+            print(swiftPaths)
+            print(storyboardPaths)
+            print(stringsPaths)
             print(stringIds)
             print(jaLocalizableLines)
         }
@@ -109,42 +110,37 @@ final class Scan {
             print("💙  Unused strings is \(unusedIds.count)")
         }
     }
-
-    func findLocalized(_ filepath: String) throws -> [String] {
-        let str = try String(contentsOfFile: filepath, encoding: .utf8)
-        return re.findall("\".+\"\\.localized", str).map { "\($0)" }
-    }
     
-    func globs(ext: String) -> Set<String> {
-        var arr: [String] = glob.glob("\(absoluteSearchPath)/*.\(ext)").map { "\($0)" }
-        arr += glob.glob("\(absoluteSearchPath)/**/*.\(ext)").map { "\($0)" }
-        arr += glob.glob("\(absoluteSearchPath)/**/**/*.\(ext)").map { "\($0)" }
-        arr += glob.glob("\(absoluteSearchPath)/**/**/**/*.\(ext)").map { "\($0)" }
-        arr += glob.glob("\(absoluteSearchPath)/**/**/**/**/*.\(ext)").map { "\($0)" }
-        arr += glob.glob("\(absoluteSearchPath)/**/**/**/**/**/*.\(ext)").map { "\($0)" }
+    func globs(ext: String) -> Set<Path> {
+        var arr: [Path] = glob.glob("\(absoluteSearchPath)/*.\(ext)").map { Path("\($0)") }
+        arr += glob.glob("\(absoluteSearchPath)/**/*.\(ext)").map { Path("\($0)") }
+        arr += glob.glob("\(absoluteSearchPath)/**/**/*.\(ext)").map { Path("\($0)") }
+        arr += glob.glob("\(absoluteSearchPath)/**/**/**/*.\(ext)").map { Path("\($0)") }
+        arr += glob.glob("\(absoluteSearchPath)/**/**/**/**/*.\(ext)").map { Path("\($0)") }
+        arr += glob.glob("\(absoluteSearchPath)/**/**/**/**/**/*.\(ext)").map { Path("\($0)") }
         return Set(arr)
     }
     
     func containsInSwiftFile(stringId: String) -> String? {
         let swiftId = swiftIdentifier(stringId)
-        for s in swiftFiles {
-            guard let str = try? String(contentsOfFile: s, encoding: .utf8) else {
+        for path in swiftPaths {
+            guard let str = try? path.read(.utf8) else {
                 continue
             }
             if str.contains(stringId) || str.contains(swiftId) {
-                return s.lastPathComponent
+                return path.lastComponent
             }
         }
         return nil
     }
     
     func containsInStoryboard(stringId: String) -> String? {
-        for s in storyboardFiles {
-            guard let str = try? String(contentsOfFile: s, encoding: .utf8) else {
+        for path in storyboardPaths {
+            guard let str = try? path.read(.utf8) else {
                 continue
             }
             if str.contains(stringId) {
-                return s.lastPathComponent
+                return path.lastComponent
             }
         }
         return nil

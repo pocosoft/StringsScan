@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import PathKit
 
 struct SourceLocation: Hashable {
-    let filepath: String
+    let filepath: Path
     let stringId: String
     let line: Int64
     let column: Int64 = 1
