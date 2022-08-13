@@ -11,6 +11,8 @@
 		2597A2FA28A74C6400537150 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2597A2F928A74C6400537150 /* ContentView.swift */; };
 		2597A2FC28A74C6500537150 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2597A2FB28A74C6500537150 /* Assets.xcassets */; };
 		2597A2FF28A74C6500537150 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2597A2FE28A74C6500537150 /* Preview Assets.xcassets */; };
+		25E312CB28A79FAF007D0F40 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 25E312CA28A79FAF007D0F40 /* Localizable.strings */; };
+		25E312CD28A79FBA007D0F40 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 25E312CC28A79FBA007D0F40 /* Localizable.stringsdict */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		2597A2FB28A74C6500537150 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2597A2FE28A74C6500537150 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2597A30028A74C6500537150 /* SwiftUIProject.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftUIProject.entitlements; sourceTree = "<group>"; };
+		25E312CA28A79FAF007D0F40 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		25E312CC28A79FBA007D0F40 /* Localizable.stringsdict */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,8 @@
 				2597A2FB28A74C6500537150 /* Assets.xcassets */,
 				2597A30028A74C6500537150 /* SwiftUIProject.entitlements */,
 				2597A2FD28A74C6500537150 /* Preview Content */,
+				25E312CA28A79FAF007D0F40 /* Localizable.strings */,
+				25E312CC28A79FBA007D0F40 /* Localizable.stringsdict */,
 			);
 			path = SwiftUIProject;
 			sourceTree = "<group>";
@@ -128,6 +134,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2597A2FF28A74C6500537150 /* Preview Assets.xcassets in Resources */,
+				25E312CD28A79FBA007D0F40 /* Localizable.stringsdict in Resources */,
+				25E312CB28A79FAF007D0F40 /* Localizable.strings in Resources */,
 				2597A2FC28A74C6500537150 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

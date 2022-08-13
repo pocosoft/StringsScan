@@ -5,11 +5,11 @@
 //  Created by Akihiro Orikasa on 2022/08/13.
 //
 
+import Foundation
 import Nimble
 import Quick
 
 @testable import StringsScan
-import Foundation
 
 final class ScanSpec: QuickSpec {
     override func spec() {

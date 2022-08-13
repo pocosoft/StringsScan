@@ -15,7 +15,7 @@ let package = Package(
         .package(url: "https://github.com/SwiftGen/StencilSwiftKit", branch: "stable"),
         .package(url: "https://github.com/Quick/Quick", branch: "main"),
         .package(url: "https://github.com/Quick/Nimble", branch: "main"),
-
+        .package(url: "https://github.com/apple/swift-system", from: "1.2.1"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -25,7 +25,8 @@ let package = Package(
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
                 .product(name: "PythonKit", package: "PythonKit"),
-                .product(name: "StencilSwiftKit", package: "StencilSwiftKit")
+                .product(name: "StencilSwiftKit", package: "StencilSwiftKit"),
+                
             ]),
         .testTarget(
             name: "StringsScanTests",
@@ -34,5 +35,15 @@ let package = Package(
                 .product(name: "Quick", package: "Quick"),
                 .product(name: "Nimble", package: "Nimble"),
             ]),
+        .testTarget(
+            name: "XcodeTests",
+            dependencies: [
+                "StringsScan",
+                .product(name: "Quick", package: "Quick"),
+                .product(name: "Nimble", package: "Nimble"),
+                .product(name: "SystemPackage", package: "swift-system"),
+            ],
+            exclude: ["UIKitProject", "SwiftUIProject"]
+        ),
     ]
 )

@@ -38,7 +38,7 @@ final class Scan {
         globs(ext: "strings")
     }()
     
-    lazy var jaLocalizableLines: Set<String> = {
+    lazy var jaLocalizableLines: [String] = {
         var lines: [String] = []
         stringsPaths.forEach { path in
             guard path.contains("ja.lproj"),
@@ -48,7 +48,7 @@ final class Scan {
             let line = content.components(separatedBy: "\n").filter { $0.starts(with: "\"") }
             lines += line
         }
-        return Set(lines)
+        return lines
     }()
     
     lazy var stringIds: Set<SourceLocation> = {
@@ -109,11 +109,6 @@ final class Scan {
             print("❤️  Used strings is \(usedIds.count)")
             print("💙  Unused strings is \(unusedIds.count)")
         }
-    }
-
-    func findLocalized(_ filepath: String) throws -> [String] {
-        let str = try String(contentsOfFile: filepath, encoding: .utf8)
-        return re.findall("\".+\"\\.localized", str).map { "\($0)" }
     }
     
     func globs(ext: String) -> Set<Path> {
