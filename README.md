@@ -1,4 +1,5 @@
 # StringsScan
+[![codecov](https://codecov.io/gh/pocosoft/StringsScan/branch/main/graph/badge.svg?token=tNUwaugU4z)](https://codecov.io/gh/pocosoft/StringsScan)
 
 Scans all Xcode strings files for unused localized strings.
 
