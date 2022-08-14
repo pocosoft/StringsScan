@@ -29,6 +29,10 @@ final class XcodeSpec: QuickSpec {
             it("stringIds") {
                 expect { scan.stringIds }.to(haveCount(3), description: scan.stringIds.map({ $0.stringId }).debugDescription)
             }
+            it("containsInSwiftFile") {
+                expect { scan.containsInSwiftFile(stringId: "Hello, world!") } == "ContentView.swift"
+                expect { scan.containsInSwiftFile(stringId: "unused") }.to(beNil())
+            }
         }
         describe("UIKit project") {
             var scan: Scan!
@@ -46,6 +50,10 @@ final class XcodeSpec: QuickSpec {
             }
             it("stringIds") {
                 expect { scan.stringIds }.to(haveCount(9), description: scan.stringIds.map({ $0.stringId }).debugDescription)
+            }
+            it("containsInSwiftFile") {
+                expect { scan.containsInSwiftFile(stringId: "Hello, world!") } == "ViewController.swift"
+                expect { scan.containsInSwiftFile(stringId: "unused") }.to(beNil())
             }
         }
     }
