@@ -26,6 +26,9 @@ final class XcodeSpec: QuickSpec {
             it("stringsPaths") {
                 expect { scan.stringsPaths }.to(haveCount(2))
             }
+            it("stringIds") {
+                expect { scan.stringIds }.to(haveCount(3), description: scan.stringIds.map({ $0.stringId }).debugDescription)
+            }
         }
         describe("UIKit project") {
             var scan: Scan!
@@ -36,10 +39,13 @@ final class XcodeSpec: QuickSpec {
                 expect { scan.swiftPaths }.to(haveCount(3), description: scan.swiftPaths.debugDescription)
             }
             it("storyboardPaths") {
-                expect { scan.storyboardPaths }.to(haveCount(2))
+                expect { scan.storyboardPaths }.to(haveCount(2), description: scan.storyboardPaths.debugDescription)
             }
             it("stringsPaths") {
-                expect { scan.stringsPaths }.to(haveCount(6), description: scan.swiftPaths.debugDescription)
+                expect { scan.stringsPaths }.to(haveCount(6), description: scan.stringsPaths.debugDescription)
+            }
+            it("stringIds") {
+                expect { scan.stringIds }.to(haveCount(9), description: scan.stringIds.map({ $0.stringId }).debugDescription)
             }
         }
     }

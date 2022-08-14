@@ -1,7 +1,2 @@
-/* 
-  Localizable.strings
-  SwiftUIProject
-
-  Created by Akihiro Orikasa on 2022/08/13.
-  
-*/
+"using" = "using";
+"unused" = "unused";

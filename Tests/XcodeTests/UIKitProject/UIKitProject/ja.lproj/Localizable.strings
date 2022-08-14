@@ -1,7 +1,3 @@
-/* 
-  Localizable.strings
-  UIKitProject
-
-  Created by Akihiro Orikasa on 2022/08/13.
-  
-*/
+"using" = "使用中";
+"unused" = "未使用";
+"ja only" = "日本語";
