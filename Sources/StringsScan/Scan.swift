@@ -21,9 +21,9 @@ final class Scan {
         absoluteSearchPath = path ?? FileManager.default.currentDirectoryPath
     }
 
-    static func main(_ path: String?, verbose: Bool) throws {
+    static func run(_ path: String?, verbose: Bool) throws {
         let l = Self(path)
-        try l.main(verbose: verbose)
+        try l.run(verbose: verbose)
     }
 
     lazy var swiftPaths: Set<Path> = {
@@ -36,19 +36,6 @@ final class Scan {
     
     lazy var stringsPaths: Set<Path> = {
         globs(ext: "strings")
-    }()
-    
-    lazy var jaLocalizableLines: [String] = {
-        var lines: [String] = []
-        stringsPaths.forEach { path in
-            guard path.contains("ja.lproj"),
-                  let content = try? path.read(.utf8) else {
-                return
-            }
-            let line = content.components(separatedBy: "\n").filter { $0.starts(with: "\"") }
-            lines += line
-        }
-        return lines
     }()
     
     lazy var stringIds: Set<SourceLocation> = {
@@ -80,19 +67,22 @@ final class Scan {
         }
         return Set(ids)
     }()
-        
-    func main(verbose: Bool) throws {
+    
+    private(set) var usedIds = [String]()
+    private(set) var unusedIds = [String]()
+    
+    func run(verbose: Bool) throws {
         if verbose {
             print(swiftPaths)
             print(storyboardPaths)
             print(stringsPaths)
             print(stringIds)
-            print(jaLocalizableLines)
         }
 
         // Whether the ID is used in the project.
-        var usedIds = [String]()
-        var unusedIds = [String]()
+        usedIds.removeAll()
+        unusedIds.removeAll()
+
         stringIds.forEach {
             if let result = containsIn(stringId: $0.stringId) {
                 if verbose {
@@ -157,9 +147,5 @@ final class Scan {
         typealias Filter = StencilSwiftKit.Filters.Strings
         let pretty = try! Filter.swiftIdentifier(stringId, arguments: [SwiftIdentifierModes.pretty])
         return try! Filter.lowerFirstWord(pretty) as! String
-    }
-    
-    func lineByStringId(_ stringId: String) -> String? {
-        jaLocalizableLines.first(where: { $0.contains(stringId) })
     }
 }

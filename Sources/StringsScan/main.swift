@@ -14,11 +14,7 @@ struct StringsScan: ParsableCommand {
 
     mutating func run() throws {
         print("Run \(phrase)")
-        do {
-            try Scan.main(path, verbose: verbose)
-        } catch let e {
-            fatalError(e.localizedDescription)
-        }
+        try Scan.run(path, verbose: verbose)
         print("End \(phrase)")
     }
 }
