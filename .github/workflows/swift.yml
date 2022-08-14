@@ -25,5 +25,10 @@ jobs:
       run: swift build -v
     - name: Run tests
       run: swift test -v --enable-code-coverage
+    - name: Shows coverage file path
+      run: swift test --show-codecov-path
     - name: Codecov
       uses: codecov/codecov-action@v3.1.0
+      with:
+        fail_ci_if_error: true
+        verbose: true
