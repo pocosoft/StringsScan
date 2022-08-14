@@ -7,23 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		253FE31E28A89759007899AC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 253FE32028A89759007899AC /* Localizable.strings */; };
+		253FE32228A8977E007899AC /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 253FE32428A8977E007899AC /* Localizable.stringsdict */; };
 		2597A2F828A74C6400537150 /* SwiftUIProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2597A2F728A74C6400537150 /* SwiftUIProjectApp.swift */; };
 		2597A2FA28A74C6400537150 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2597A2F928A74C6400537150 /* ContentView.swift */; };
 		2597A2FC28A74C6500537150 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2597A2FB28A74C6500537150 /* Assets.xcassets */; };
 		2597A2FF28A74C6500537150 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2597A2FE28A74C6500537150 /* Preview Assets.xcassets */; };
-		25E312CB28A79FAF007D0F40 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 25E312CA28A79FAF007D0F40 /* Localizable.strings */; };
-		25E312CD28A79FBA007D0F40 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 25E312CC28A79FBA007D0F40 /* Localizable.stringsdict */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		253FE31F28A89759007899AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		253FE32128A8976F007899AC /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		253FE32328A8977E007899AC /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ja; path = ja.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		253FE32528A89781007899AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		2597A2F428A74C6400537150 /* SwiftUIProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2597A2F728A74C6400537150 /* SwiftUIProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIProjectApp.swift; sourceTree = "<group>"; };
 		2597A2F928A74C6400537150 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2597A2FB28A74C6500537150 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2597A2FE28A74C6500537150 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2597A30028A74C6500537150 /* SwiftUIProject.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftUIProject.entitlements; sourceTree = "<group>"; };
-		25E312CA28A79FAF007D0F40 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
-		25E312CC28A79FBA007D0F40 /* Localizable.stringsdict */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,8 +63,8 @@
 				2597A2FB28A74C6500537150 /* Assets.xcassets */,
 				2597A30028A74C6500537150 /* SwiftUIProject.entitlements */,
 				2597A2FD28A74C6500537150 /* Preview Content */,
-				25E312CA28A79FAF007D0F40 /* Localizable.strings */,
-				25E312CC28A79FBA007D0F40 /* Localizable.stringsdict */,
+				253FE32028A89759007899AC /* Localizable.strings */,
+				253FE32428A8977E007899AC /* Localizable.stringsdict */,
 			);
 			path = SwiftUIProject;
 			sourceTree = "<group>";
@@ -117,6 +119,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = 2597A2EB28A74C6400537150;
 			productRefGroup = 2597A2F528A74C6400537150 /* Products */;
@@ -134,8 +137,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2597A2FF28A74C6500537150 /* Preview Assets.xcassets in Resources */,
-				25E312CD28A79FBA007D0F40 /* Localizable.stringsdict in Resources */,
-				25E312CB28A79FAF007D0F40 /* Localizable.strings in Resources */,
+				253FE32228A8977E007899AC /* Localizable.stringsdict in Resources */,
+				253FE31E28A89759007899AC /* Localizable.strings in Resources */,
 				2597A2FC28A74C6500537150 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -154,11 +157,33 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		253FE32028A89759007899AC /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				253FE31F28A89759007899AC /* en */,
+				253FE32128A8976F007899AC /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		253FE32428A8977E007899AC /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				253FE32328A8977E007899AC /* ja */,
+				253FE32528A89781007899AC /* en */,
+			);
+			name = Localizable.stringsdict;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		2597A30128A74C6500537150 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -219,6 +244,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
