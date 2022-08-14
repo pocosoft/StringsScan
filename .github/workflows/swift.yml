@@ -30,6 +30,6 @@ jobs:
     - name: Codecov
       uses: codecov/codecov-action@v3.1.0
       with:
-        directory: ./.build/x86_64-apple-macosx/debug/codecov/
+        files: .build/x86_64-apple-macosx/debug/codecov/StringsScan.json
         fail_ci_if_error: true
         verbose: true
