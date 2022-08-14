@@ -25,11 +25,11 @@ jobs:
       run: swift build -v
     - name: Run tests
       run: swift test -v --enable-code-coverage
-    - name: Shows coverage file path
-      run: swift test --show-codecov-path
+    - name: Copy coverage report
+      run: xcrun llvm-cov export -format="lcov" -instr-profile=$(find .build -name default.profdata) $(find .build -name StringsScanPackageTests) > coverage.lcov
     - name: Codecov
       uses: codecov/codecov-action@v3.1.0
       with:
-        files: .build/x86_64-apple-macosx/debug/codecov/StringsScan.json
+        files: coverage.lcov
         fail_ci_if_error: true
         verbose: true
