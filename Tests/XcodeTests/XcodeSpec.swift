@@ -55,6 +55,10 @@ final class XcodeSpec: QuickSpec {
                 expect { scan.containsInSwiftFile(stringId: "Hello, world!") } == "ViewController.swift"
                 expect { scan.containsInSwiftFile(stringId: "unused") }.to(beNil())
             }
+            it("containsInStoryboard") {
+                expect { scan.containsInStoryboard(stringId: "Nu5-YW-uYY") } == "Main.storyboard"
+                expect { scan.containsInSwiftFile(stringId: "ccI-Bz-hZa") }.to(beNil())
+            }
         }
     }
 }
