@@ -24,7 +24,7 @@ final class XcodeSpec: QuickSpec {
                 expect { scan.storyboardPaths }.to(beEmpty())
             }
             it("stringsPaths") {
-                expect { scan.stringsPaths }.to(haveCount(1))
+                expect { scan.stringsPaths }.to(haveCount(2))
             }
         }
         describe("UIKit project") {
@@ -39,7 +39,7 @@ final class XcodeSpec: QuickSpec {
                 expect { scan.storyboardPaths }.to(haveCount(2))
             }
             it("stringsPaths") {
-                expect { scan.stringsPaths }.to(haveCount(5), description: scan.swiftPaths.debugDescription)
+                expect { scan.stringsPaths }.to(haveCount(6), description: scan.swiftPaths.debugDescription)
             }
         }
     }
