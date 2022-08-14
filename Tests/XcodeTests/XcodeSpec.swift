@@ -37,6 +37,11 @@ final class XcodeSpec: QuickSpec {
                 expect { scan.containsInSwiftFile(stringId: "Hello, world!") } == "ContentView.swift"
                 expect { scan.containsInSwiftFile(stringId: "unused") }.to(beNil())
             }
+            it("run") {
+                try scan.run(verbose: true)
+                expect { scan.usedIds }.to(haveCount(1))
+                expect { scan.unusedIds }.to(haveCount(2))
+            }
         }
         describe("UIKit project") {
             var scan: Scan!
@@ -68,6 +73,11 @@ final class XcodeSpec: QuickSpec {
                 expect { scan.containsIn(stringId: "unused") }.to(beNil())
                 expect { scan.containsIn(stringId: "Nu5-YW-uYY") } == "Main.storyboard"
                 expect { scan.containsIn(stringId: "ccI-Bz-hZa") }.to(beNil())
+            }
+            it("run") {
+                try scan.run(verbose: true)
+                expect { scan.usedIds }.to(haveCount(4))
+                expect { scan.unusedIds }.to(haveCount(5))
             }
         }
     }

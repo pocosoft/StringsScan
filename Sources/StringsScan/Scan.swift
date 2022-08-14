@@ -21,9 +21,9 @@ final class Scan {
         absoluteSearchPath = path ?? FileManager.default.currentDirectoryPath
     }
 
-    static func main(_ path: String?, verbose: Bool) throws {
+    static func run(_ path: String?, verbose: Bool) throws {
         let l = Self(path)
-        try l.main(verbose: verbose)
+        try l.run(verbose: verbose)
     }
 
     lazy var swiftPaths: Set<Path> = {
@@ -67,8 +67,11 @@ final class Scan {
         }
         return Set(ids)
     }()
-        
-    func main(verbose: Bool) throws {
+    
+    private(set) var usedIds = [String]()
+    private(set) var unusedIds = [String]()
+    
+    func run(verbose: Bool) throws {
         if verbose {
             print(swiftPaths)
             print(storyboardPaths)
@@ -77,8 +80,9 @@ final class Scan {
         }
 
         // Whether the ID is used in the project.
-        var usedIds = [String]()
-        var unusedIds = [String]()
+        usedIds.removeAll()
+        unusedIds.removeAll()
+
         stringIds.forEach {
             if let result = containsIn(stringId: $0.stringId) {
                 if verbose {

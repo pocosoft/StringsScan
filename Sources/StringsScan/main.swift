@@ -14,7 +14,7 @@ struct StringsScan: ParsableCommand {
 
     mutating func run() throws {
         print("Run \(phrase)")
-        try Scan.main(path, verbose: verbose)
+        try Scan.run(path, verbose: verbose)
         print("End \(phrase)")
     }
 }
