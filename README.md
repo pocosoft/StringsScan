@@ -30,3 +30,7 @@ cd ${BUILD_DIR%Build/*}SourcePackages/checkouts/StringsScan
 ![スクリーンショット 2022-08-15 9 36 42](https://user-images.githubusercontent.com/12389710/184560987-7ef443e5-836f-4840-8332-e06b2705b060.png)
 
 ![スクリーンショット 2022-08-15 9 37 30](https://user-images.githubusercontent.com/12389710/184561015-b2615f3c-7ca9-429b-a13c-b5cb8b3f1aac.png)
+
+> Tip
+> It is still under development and performance is not good.
+> Please note that build times will be slower.
