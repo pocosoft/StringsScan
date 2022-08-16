@@ -37,6 +37,15 @@ final class XcodeSpec: QuickSpec {
                 expect { scan.containsInSwiftFile(stringId: "Hello, world!") } == "ContentView.swift"
                 expect { scan.containsInSwiftFile(stringId: "unused") }.to(beNil())
             }
+            it("isLocalizedFromStroyboard") {
+                expect { "Eph-cL-JCB.text".isLocalizedFromStroyboard } == true
+                expect { "Nu5-YW-uYY.text".isLocalizedFromStroyboard } == true
+                expect { "ccY-Bz-hZa.configuration.title".isLocalizedFromStroyboard } == true
+                expect { "ccY-Bz-hZa.normalTitle".isLocalizedFromStroyboard } == true
+                expect { "Hello, world!".isLocalizedFromStroyboard } == false
+                expect { "unused".isLocalizedFromStroyboard } == false
+                expect { "get-my-size.hoghoge".isLocalizedFromStroyboard } == false
+            }
             it("run") {
                 try scan.run(verbose: true)
                 expect { scan.usedIds }.to(haveCount(1))

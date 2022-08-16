@@ -44,26 +44,17 @@ final class Scan {
             guard let content = try? path.read(.utf8) else {
                 return
             }
-            if path.lastComponent == "Localizable.strings" {
-                content.components(separatedBy: "\n").enumerated()
-                    .filter { $1.starts(with: "\"") }
-                    .forEach { line, elem in
-                        var id = elem.components(separatedBy: " = ").first!
-                        id.removeFirst()
-                        id.removeLast()
-                        ids.append(SourceLocation(filepath: path, stringId: id, line: Int64(line + 1)))
-                    }
-            } else {    // Storyboard's strings file
-                content.components(separatedBy: "\n").enumerated()
-                    .filter { $1.starts(with: "\"") }
-                    .forEach { line, elem in
-                        var id = elem.components(separatedBy: " = ").first!
-                        id.removeFirst()
-                        id.removeLast()
+            content.components(separatedBy: "\n").enumerated()
+                .filter { $1.starts(with: "\"") }
+                .forEach { line, elem in
+                    var id = elem.components(separatedBy: " = ").first!
+                    id.removeFirst()
+                    id.removeLast()
+                    if id.isLocalizedFromStroyboard {
                         id = id.components(separatedBy: ".").first! // split for `.text` or `.title`
-                        ids.append(SourceLocation(filepath: path, stringId: id, line: Int64(line + 1)))
                     }
-            }
+                    ids.append(SourceLocation(filepath: path, stringId: id, line: Int64(line + 1)))
+                }
         }
         return Set(ids)
     }()
@@ -147,5 +138,17 @@ final class Scan {
         typealias Filter = StencilSwiftKit.Filters.Strings
         let pretty = try! Filter.swiftIdentifier(stringId, arguments: [SwiftIdentifierModes.pretty])
         return try! Filter.lowerFirstWord(pretty) as! String
+    }
+}
+
+extension String {
+    var isLocalizedFromStroyboard: Bool {
+        let pattern = "^\\w{3}+\\-\\w{2}\\-\\w{3}\\."
+        guard let regex = try? NSRegularExpression(pattern: pattern) else {
+            return false
+        }
+        return regex.firstMatch(in: self,
+                                options: NSRegularExpression.MatchingOptions.reportProgress,
+                                range: NSRange(location: 0, length: count)) != nil
     }
 }
