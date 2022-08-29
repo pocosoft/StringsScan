@@ -10,3 +10,5 @@
 
 /* Class = "UITextField"; text = "View TextFields"; ObjectID = "sBM-4m-Uap"; */
 "sBM-4m-Uap.text" = "ビューのテキスト";
+
+"use-un-Uap.text" = "未使用のテキスト";
