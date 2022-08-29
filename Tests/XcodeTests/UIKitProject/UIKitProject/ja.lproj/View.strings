@@ -1,0 +1,14 @@
+
+/* Class = "UILabel"; text = "Views Label"; ObjectID = "2l0-Wl-jj5"; */
+"2l0-Wl-jj5.text" = "ビューのテキスト";
+
+/* Class = "UIButton"; configuration.title = "Views Button"; ObjectID = "G9N-De-w6T"; */
+"G9N-De-w6T.configuration.title" = "ビューのボタン";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "G9N-De-w6T"; */
+"G9N-De-w6T.normalTitle" = "ボタン";
+
+/* Class = "UITextField"; text = "View TextFields"; ObjectID = "sBM-4m-Uap"; */
+"sBM-4m-Uap.text" = "ビューのテキスト";
+
+"use-un-Uap.text" = "未使用のテキスト";

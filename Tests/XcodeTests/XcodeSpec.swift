@@ -63,11 +63,14 @@ final class XcodeSpec: QuickSpec {
             it("storyboardPaths") {
                 expect { scan.storyboardPaths }.to(haveCount(2), description: scan.storyboardPaths.debugDescription)
             }
+            it("xibPaths") {
+                expect { scan.xibPaths }.to(haveCount(1), description: scan.storyboardPaths.debugDescription)
+            }
             it("stringsPaths") {
-                expect { scan.stringsPaths }.to(haveCount(6), description: scan.stringsPaths.debugDescription)
+                expect { scan.stringsPaths }.to(haveCount(8), description: scan.stringsPaths.debugDescription)
             }
             it("stringIds") {
-                expect { scan.stringIds }.to(haveCount(9), description: scan.stringIds.map({ $0.stringId }).debugDescription)
+                expect { scan.stringIds }.to(haveCount(13), description: scan.stringIds.map({ $0.stringId }).debugDescription)
             }
             it("containsInSwiftFile") {
                 expect { scan.containsInSwiftFile(stringId: "Hello, world!") } == "ViewController.swift"
@@ -85,8 +88,8 @@ final class XcodeSpec: QuickSpec {
             }
             it("run") {
                 try scan.run(verbose: true)
-                expect { scan.usedIds }.to(haveCount(4))
-                expect { scan.unusedIds }.to(haveCount(5))
+                expect { scan.usedIds }.to(haveCount(7))
+                expect { scan.unusedIds }.to(haveCount(6))
             }
         }
     }

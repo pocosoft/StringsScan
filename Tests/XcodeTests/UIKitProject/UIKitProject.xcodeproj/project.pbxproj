@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2512FF8E28BCBE37001A8DF0 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2512FF9028BCBE37001A8DF0 /* View.xib */; };
 		2517282828A74D62002F5C5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2517282728A74D62002F5C5B /* AppDelegate.swift */; };
 		2517282A28A74D62002F5C5B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2517282928A74D62002F5C5B /* SceneDelegate.swift */; };
 		2517282C28A74D62002F5C5B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2517282B28A74D62002F5C5B /* ViewController.swift */; };
@@ -18,6 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2512FF8F28BCBE37001A8DF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/View.xib; sourceTree = "<group>"; };
+		2512FF9228BCBE3A001A8DF0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/View.strings; sourceTree = "<group>"; };
+		2512FF9428BCBE3A001A8DF0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/View.strings; sourceTree = "<group>"; };
 		2517282428A74D62002F5C5B /* UIKitProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UIKitProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2517282728A74D62002F5C5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2517282928A74D62002F5C5B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +79,7 @@
 				2517283528A74D63002F5C5B /* Info.plist */,
 				253FE31828A89704007899AC /* Localizable.strings */,
 				253FE31B28A89711007899AC /* Localizable.stringsdict */,
+				2512FF9028BCBE37001A8DF0 /* View.xib */,
 			);
 			path = UIKitProject;
 			sourceTree = "<group>";
@@ -142,6 +147,7 @@
 				253FE31628A89704007899AC /* Localizable.strings in Resources */,
 				2517283128A74D63002F5C5B /* Assets.xcassets in Resources */,
 				253FE31928A89711007899AC /* Localizable.stringsdict in Resources */,
+				2512FF8E28BCBE37001A8DF0 /* View.xib in Resources */,
 				2517282F28A74D62002F5C5B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -162,6 +168,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		2512FF9028BCBE37001A8DF0 /* View.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2512FF8F28BCBE37001A8DF0 /* Base */,
+				2512FF9228BCBE3A001A8DF0 /* en */,
+				2512FF9428BCBE3A001A8DF0 /* ja */,
+			);
+			name = View.xib;
+			sourceTree = "<group>";
+		};
 		2517282D28A74D62002F5C5B /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

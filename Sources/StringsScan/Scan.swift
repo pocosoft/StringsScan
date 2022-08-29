@@ -33,7 +33,11 @@ final class Scan {
     lazy var storyboardPaths: Set<Path> = {
         globs(ext: "storyboard")
     }()
-    
+
+    lazy var xibPaths: Set<Path> = {
+        globs(ext: "xib")
+    }()
+
     lazy var stringsPaths: Set<Path> = {
         globs(ext: "strings")
     }()
@@ -67,6 +71,7 @@ final class Scan {
             print(swiftPaths)
             print(storyboardPaths)
             print(stringsPaths)
+            print(xibPaths)
             print(stringIds)
         }
 
@@ -116,7 +121,7 @@ final class Scan {
     }
     
     func containsInStoryboard(stringId: String) -> String? {
-        for path in storyboardPaths {
+        for path in storyboardPaths.union(xibPaths) {
             guard let str = try? path.read(.utf8) else {
                 continue
             }

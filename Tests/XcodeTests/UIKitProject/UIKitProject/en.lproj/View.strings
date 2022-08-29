@@ -1,0 +1,14 @@
+
+/* Class = "UILabel"; text = "Views Label"; ObjectID = "2l0-Wl-jj5"; */
+"2l0-Wl-jj5.text" = "Views Label";
+
+/* Class = "UIButton"; configuration.title = "Views Button"; ObjectID = "G9N-De-w6T"; */
+"G9N-De-w6T.configuration.title" = "Views Button";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "G9N-De-w6T"; */
+"G9N-De-w6T.normalTitle" = "Button";
+
+/* Class = "UITextField"; text = "View TextFields"; ObjectID = "sBM-4m-Uap"; */
+"sBM-4m-Uap.text" = "View TextFields";
+
+"use-un-Uap.text" = "Unused text";
